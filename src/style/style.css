@@ -7,3 +7,10 @@ body {
 
     background: #8C11BE;
 }
+
+.root {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
