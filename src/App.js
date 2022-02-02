@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignIn from "./components/SignIn";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import './style/reset.css';
+import './style/style.css';
 
 export default function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<SignIn />} />
-                {/* <Route path="/sign-up" element={<SignUp />} />
-                <Route path="/wallet" element={<MainPage />} />
+                <Route path="/" element={<Login />} />
+                <Route path="/sign-up" element={<Register />} />
+                {/* <Route path="/wallet" element={<MainPage />} />
                 <Route path="/in" element={<In />} />
                 <Route path="/out" element={<Out />} /> */}
             </Routes>
