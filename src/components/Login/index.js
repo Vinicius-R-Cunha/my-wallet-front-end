@@ -7,7 +7,7 @@ import { Container } from "./style";
 export default function Login() {
 
     const [formData, setFormData] = useState({ email: '', password: '' });
-    const { setToken } = useContext(UserContext);
+    const { setUserName, setToken } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -16,11 +16,12 @@ export default function Login() {
 
         const promise = axios.post('http://localhost:5000/sign-in', formData);
         promise.then(answer => {
-            setToken(answer.data);
+            setToken(answer.data.token);
+            setUserName(answer.data.name);
             navigate('/wallet');
         });
 
-        promise.catch(answer => alert(answer.response.data));
+        promise.catch(answer => window.alert(answer.response.data));
     }
 
     function handleInput(e) {

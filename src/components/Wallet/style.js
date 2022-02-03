@@ -16,12 +16,65 @@ const Registers = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    
     background: #FFFFFF;
-
+    
     margin: 22px 0 12px 0;
-
+    
     border-radius: 5px;
+
+    position: relative;
+    
+    .empty-message {
+        font-size: 20px;
+        line-height: 23px;
+        text-align: center;
+        color: #868686;
+        
+        margin: auto 0;
+    }
+
+    .item {
+        width: 93%;
+
+        font-size: 16px;
+        line-height: 19px;
+        
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 21px;
+
+        .name {
+            color: #000000;
+            span {
+                margin-right: 6px;
+
+                color: #C6C6C6;
+            }
+        }
+
+        .price {
+            color: #C70000;
+        }
+    }
+
+    .subtotal {
+        width: 93%;
+
+        display: flex;
+        justify-content: space-between;
+
+        position: absolute;
+        bottom: 10px;
+
+        .name {
+            font-weight: bold;
+            font-size: 17px;
+            line-height: 20px;
+            color: #000000;
+        }
+    }
 `
 
 const Buttons = styled.div`
