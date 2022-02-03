@@ -7,7 +7,7 @@ export default function Header({ text, main }) {
     const navigate = useNavigate();
 
     function logout() {
-        navigate('/');
+        navigate('/sign-in');
     }
 
     return (

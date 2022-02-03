@@ -18,7 +18,7 @@ export default function Register() {
 
         if (formData.password === formData.passwordConfirmation) {
             const promise = axios.post('http://localhost:5000/sign-up', formData);
-            promise.then(() => navigate("/"));
+            promise.then(() => navigate("/sign-in"));
             promise.catch(error => window.alert(error.response.data));
         } else {
             window.alert('as senhas nao coincidem');
@@ -53,7 +53,7 @@ export default function Register() {
                 onChange={e => handleInput(e)}
                 value={formData.passwordConfirmation} />
             <button onClick={e => handleSubmit(e)}>Cadastrar</button>
-            <Link to="/">Já tem uma conta? Entre agora!</Link>
+            <Link to="/sign-in">Já tem uma conta? Entre agora!</Link>
         </Container>
     );
 }

@@ -4,13 +4,13 @@ import Header from '../Header/index.js';
 import { useContext, useEffect } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import axios from 'axios';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Wallet() {
 
     const { token, userName } = useContext(UserContext);
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -52,11 +52,11 @@ export default function Wallet() {
             </Registers>
 
             <Buttons>
-                <button>
+                <button onClick={() => navigate('/add-income')}>
                     <ion-icon name="add-circle-outline"></ion-icon>
                     <p>Nova<br />entrada</p>
                 </button>
-                <button>
+                <button onClick={() => navigate('/add-expense')}>
                     <ion-icon name="remove-circle-outline"></ion-icon>
                     <p>Nova<br />saída</p>
                 </button>

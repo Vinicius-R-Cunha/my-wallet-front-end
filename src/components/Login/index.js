@@ -18,7 +18,7 @@ export default function Login() {
         promise.then(answer => {
             setToken(answer.data.token);
             setUserName(answer.data.name);
-            navigate('/wallet');
+            navigate('/');
         });
 
         promise.catch(answer => window.alert(answer.response.data));
