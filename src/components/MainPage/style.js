@@ -31,7 +31,7 @@ const Buttons = styled.div`
     justify-content: space-between;
 
     button {
-        width: 156px;
+        width: 48%;
         height: 114px;
 
         background: #A328D6;

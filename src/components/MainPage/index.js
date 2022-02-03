@@ -1,11 +1,41 @@
 import './style.js';
 import { MainDiv, Registers, Buttons } from "./style";
 import Header from '../Header/index.js';
+import { useContext, useEffect } from 'react';
+import UserContext from '../../contexts/UserContext.js';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function MainPage() {
+
+    const { token, userName, setUserName } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const promise = axios.get('http://localhost:5000/user', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        promise.then(answer => setUserName(answer.data));
+        promise.catch(error => {
+            console.log(error);
+            navigate('/');
+        });
+    }, [navigate, token, setUserName]);
+
+
+    if (!userName) {
+        return (
+            <h1>Carregando</h1>
+        );
+    }
+
     return (
         <MainDiv>
-            <Header text={'Olá, Fulano'} main={true} />
+            <Header text={`Olá, ${userName}`} main={true} />
 
             <Registers>
 
