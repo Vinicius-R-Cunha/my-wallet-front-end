@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import { Container } from "./style";
@@ -7,9 +7,15 @@ import { Container } from "./style";
 export default function Login() {
 
     const [formData, setFormData] = useState({ email: '', password: '' });
-    const { setUserName, setToken } = useContext(UserContext);
+    const { token, setUserName, setToken } = useContext(UserContext);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,10 +24,12 @@ export default function Login() {
         promise.then(answer => {
             setToken(answer.data.token);
             setUserName(answer.data.name);
+            localStorage.setItem('localToken', answer.data.token);
+            localStorage.setItem('userName', answer.data.name);
             navigate('/');
         });
 
-        promise.catch(answer => window.alert(answer.response.data));
+        promise.catch(answer => window.alert(answer.response));
     }
 
     function handleInput(e) {
