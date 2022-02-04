@@ -78,6 +78,14 @@ const Registers = styled.div`
             line-height: 20px;
             color: #000000;
         }
+
+        .red {
+            color: #C70000;
+        }
+
+        .green {
+            color: #03AC00;
+        }
     }
 `
 

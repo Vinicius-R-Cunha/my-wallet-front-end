@@ -10,6 +10,7 @@ export default function Wallet() {
 
     const { token, userName } = useContext(UserContext);
     const [expenses, setExpenses] = useState();
+    const [subtotal, setSubtotal] = useState();
 
     const navigate = useNavigate();
 
@@ -23,7 +24,8 @@ export default function Wallet() {
                 }
             });
             promise.then(answer => {
-                setExpenses(answer.data);
+                setExpenses(answer.data.expenses);
+                setSubtotal(answer.data.subtotal);
             });
             promise.catch(answer => console.log(answer));
         }
@@ -51,10 +53,10 @@ export default function Wallet() {
                         )
                     })
                 }
-                {/* <div className='subtotal'>
+                <div className='subtotal'>
                     <p className='name'>SALDO</p>
-                    <p className='price'>39,90</p>
-                </div> */}
+                    <p className={parseFloat(subtotal?.replace(',', '.')) >= 0 ? 'green' : 'red'}>{subtotal}</p>
+                </div>
             </Registers>
 
             <Buttons>
