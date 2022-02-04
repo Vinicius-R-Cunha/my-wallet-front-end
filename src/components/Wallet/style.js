@@ -54,8 +54,12 @@ const Registers = styled.div`
             }
         }
 
-        .price {
+        .red {
             color: #C70000;
+        }
+
+        .green {
+            color: #03AC00;
         }
     }
 

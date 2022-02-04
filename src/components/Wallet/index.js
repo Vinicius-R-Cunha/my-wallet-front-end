@@ -1,7 +1,7 @@
 import './style.js';
 import { MainDiv, Registers, Buttons } from "./style";
 import Header from '../Header/index.js';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,15 +9,28 @@ import { useNavigate } from 'react-router-dom';
 export default function Wallet() {
 
     const { token, userName } = useContext(UserContext);
+    const [expenses, setExpenses] = useState();
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!token) {
+            navigate('/sign-in');
+        } else {
+            const promise = axios.get('http://localhost:5000/wallet', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            promise.then(answer => {
+                setExpenses(answer.data);
+            });
+            promise.catch(answer => console.log(answer));
+        }
+    }, [token, navigate]);
 
-    }, []);
 
-
-    if (!userName) {
+    if (!expenses) {
         return (
             <h1>Carregando</h1>
         );
@@ -28,24 +41,17 @@ export default function Wallet() {
             <Header text={`Olá, ${userName}`} main={true} />
 
             <Registers>
-                <p className='empty-message'>Não há registros de<br />entrada ou saída</p>
-                {/* <div className='item'>
-                    <p className='name'><span>30/11</span>Almoço mãe</p>
-                    <p className='price'>39,90</p>
-                </div>
-                <div className='item'>
-                    <p className='name'><span>30/11</span>Almoço mãe</p>
-                    <p className='price'>39,90</p>
-                </div>
-                <div className='item'>
-                    <p className='name'><span>30/11</span>Almoço mãe</p>
-                    <p className='price'>39,90</p>
-                </div>
-                <div className='item'>
-                    <p className='name'><span>30/11</span>Almoço mãe</p>
-                    <p className='price'>39,90</p>
-                </div>
-                <div className='subtotal'>
+                {expenses.length === 0 ? <p className='empty-message'>Não há registros de<br />entrada ou saída</p> :
+                    expenses.map(obj => {
+                        return (
+                            <div className='item' key={expenses.indexOf(obj)}>
+                                <p className='name'><span>{obj.date}</span>{obj.description}</p>
+                                <p className={obj.expense ? 'red' : 'green'}>{obj.value}</p>
+                            </div>
+                        )
+                    })
+                }
+                {/* <div className='subtotal'>
                     <p className='name'>SALDO</p>
                     <p className='price'>39,90</p>
                 </div> */}
