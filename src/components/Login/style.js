@@ -58,6 +58,13 @@ const Container = styled.form`
         color: #FFFFFF;
 
         text-decoration: none;
+
+        padding-bottom: 30px;
+    }
+
+    .error-message {
+        margin-bottom: 12px;
+        color: red;
     }
 `
 

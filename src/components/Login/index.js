@@ -7,6 +7,7 @@ import { Container } from "./style";
 export default function Login() {
 
     const [formData, setFormData] = useState({ email: '', password: '' });
+    const [error, setError] = useState(false);
     const { token, setUserName, setToken } = useContext(UserContext);
 
     const navigate = useNavigate();
@@ -20,16 +21,28 @@ export default function Login() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const promise = axios.post('http://localhost:5000/sign-in', formData);
-        promise.then(answer => {
-            setToken(answer.data.token);
-            setUserName(answer.data.name);
-            localStorage.setItem('localToken', answer.data.token);
-            localStorage.setItem('userName', answer.data.name);
-            navigate('/');
-        });
+        const emailNotEmpty = formData.email !== '';
+        const passwordNotEmpty = formData.password !== '';
 
-        promise.catch(answer => window.alert(answer.response));
+        if (emailNotEmpty && passwordNotEmpty) {
+            const promise = axios.post('http://localhost:5000/sign-in', formData);
+            promise.then(answer => {
+                setToken(answer.data.token);
+                setUserName(answer.data.name);
+                localStorage.setItem('localToken', answer.data.token);
+                localStorage.setItem('userName', answer.data.name);
+                navigate('/');
+            });
+            promise.catch(handleError);
+        } else {
+            setError(true);
+            setTimeout(() => setError(false), 2500);
+        }
+    }
+
+    function handleError() {
+        setError(true);
+        setTimeout(() => setError(false), 2500);
     }
 
     function handleInput(e) {
@@ -53,6 +66,7 @@ export default function Login() {
                 onChange={e => handleInput(e)}
                 value={formData.password}
             />
+            {error && <p className="error-message">Usuário e/ou senha incorretos</p>}
             <button onClick={e => handleSubmit(e)}>Entrar</button>
             <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
         </Container>
