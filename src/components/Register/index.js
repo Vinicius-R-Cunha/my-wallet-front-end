@@ -18,7 +18,7 @@ export default function Register() {
         if (token) {
             navigate('/');
         }
-    }, [token, navigate]);
+    });
 
     function handleInput(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });

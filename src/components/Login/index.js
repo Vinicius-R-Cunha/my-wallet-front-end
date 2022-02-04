@@ -16,7 +16,7 @@ export default function Login() {
         if (token) {
             navigate('/');
         }
-    }, [token, navigate]);
+    });
 
     function handleSubmit(e) {
         e.preventDefault();
