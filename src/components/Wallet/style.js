@@ -22,9 +22,8 @@ const Registers = styled.div`
     margin: 22px 0 12px 0;
     
     border-radius: 5px;
-
-    position: relative;
     
+    overflow-y: scroll;
     .empty-message {
         font-size: 20px;
         line-height: 23px;
@@ -69,8 +68,9 @@ const Registers = styled.div`
         display: flex;
         justify-content: space-between;
 
-        position: absolute;
         bottom: 10px;
+
+        margin: 18px 0 10px 0;
 
         .name {
             font-weight: bold;
