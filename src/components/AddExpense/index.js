@@ -1,7 +1,7 @@
 import Header from "../Header";
 import { AddDiv, AddForm } from "./style";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,12 @@ export default function AddExpense() {
     const [formData, setFormData] = useState({ value: '', description: '' });
     const { token } = useContext(UserContext);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!token) {
+            navigate('/sign-in');
+        }
+    }, [token, navigate]);
 
     function handleInput(e) {
         setFormData({ ...formData, [e.target.className]: e.target.value })

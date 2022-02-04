@@ -2,12 +2,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../Login/style';
 import { Container } from '../Login/style';
 import axios from 'axios';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import UserContext from '../../contexts/UserContext';
 
 export default function Register() {
 
     const [formData, setFormData] = useState({ name: '', email: '', password: '', passwordConfirmation: '' });
+    const { token } = useContext(UserContext);
+
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (token) {
+            navigate('/');
+        }
+    }, [token, navigate]);
 
     function handleInput(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value })
