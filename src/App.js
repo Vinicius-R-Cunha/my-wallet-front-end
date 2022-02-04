@@ -11,9 +11,11 @@ import './style/style.css';
 
 export default function App() {
 
-    // const [userName, setUserName] = useState(null);
-    const [userName, setUserName] = useState('Gruli');
-    const [token, setToken] = useState();
+    const localToken = localStorage.getItem('localToken');
+    const localUserName = localStorage.getItem('userName');
+
+    const [userName, setUserName] = useState(localUserName);
+    const [token, setToken] = useState(localToken);
 
     return (
         <UserContext.Provider value={{ token, setToken, userName, setUserName }}>
