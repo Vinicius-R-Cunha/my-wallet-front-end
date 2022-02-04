@@ -40,7 +40,6 @@ const Container = styled.form`
 
         font-weight: 700;
         font-size: 20px;
-        line-height: 23px;
         color: #FFFFFF;
 
         background: #A328D6;

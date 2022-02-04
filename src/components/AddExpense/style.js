@@ -37,7 +37,7 @@ const AddForm = styled.form`
         width: 100%;
         height: 46px;
 
-        font-weight: bold;
+        font-weight: 700;
         font-size: 20px;
         color: #FFFFFF;
         
