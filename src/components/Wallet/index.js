@@ -1,7 +1,7 @@
 import './style.js';
 import { MainDiv, Registers, Buttons } from "./style";
 import Header from '../Header/index.js';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -14,23 +14,36 @@ export default function Wallet() {
 
     const navigate = useNavigate();
 
+    const renderPage = useCallback(() => {
+        const promise = axios.get('http://localhost:5000/wallet', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        promise.then(answer => {
+            setExpenses(answer.data.expenses);
+            setSubtotal(answer.data.subtotal);
+        });
+        promise.catch(answer => console.log(answer));
+    }, [token]);
+
     useEffect(() => {
         if (!token) {
             navigate('/sign-in');
         } else {
-            const promise = axios.get('http://localhost:5000/wallet', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            promise.then(answer => {
-                setExpenses(answer.data.expenses);
-                setSubtotal(answer.data.subtotal);
-            });
-            promise.catch(answer => console.log(answer));
+            renderPage();
         }
-    }, [token, navigate]);
+    }, [token, navigate, renderPage]);
 
+    function handleDelete(obj) {
+        const promise = axios.delete(`http://localhost:5000/wallet/${obj._id}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        promise.then(renderPage);
+        promise.catch(answer => console.log(answer));
+    }
 
     if (!expenses) {
         return (
@@ -42,21 +55,25 @@ export default function Wallet() {
         <MainDiv>
             <Header text={`Olá, ${userName}`} main={true} />
 
-            <Registers>
+            <Registers length={expenses.length}>
                 {expenses.length === 0 ? <p className='empty-message'>Não há registros de<br />entrada ou saída</p> :
                     expenses.map(obj => {
                         return (
-                            <div className='item' key={expenses.indexOf(obj)}>
+                            <div className='item' key={obj._id}>
                                 <p className='name'><span>{obj.date}</span>{obj.description}</p>
-                                <p className={obj.expense ? 'red' : 'green'}>{obj.value}</p>
+                                <div className='price-delete-div'>
+                                    <p className={obj.expense ? 'red' : 'green'}>{obj.value}</p>
+                                    <p onClick={() => handleDelete(obj)} className='delete-button'>x</p>
+                                </div>
                             </div>
                         )
                     })
                 }
-                <div className='subtotal'>
-                    <p className='name'>SALDO</p>
-                    <p className={parseFloat(subtotal?.replace(',', '.')) >= 0 ? 'green' : 'red'}>{subtotal}</p>
-                </div>
+                {expenses.length !== 0 &&
+                    <div className='subtotal'>
+                        <p className='name'>SALDO</p>
+                        <p className={parseFloat(subtotal?.replace(',', '.')) >= 0 ? 'green' : 'red'}>{subtotal}</p>
+                    </div>}
             </Registers>
 
             <Buttons>

@@ -23,6 +23,8 @@ const Registers = styled.div`
     
     border-radius: 5px;
     
+    position: relative;
+
     overflow-y: scroll;
     .empty-message {
         font-size: 20px;
@@ -53,6 +55,19 @@ const Registers = styled.div`
             }
         }
 
+        .price-delete-div {
+            display: flex;
+        }
+
+        .delete-button {
+            width: 20px;
+
+            color: #C6C6C6;
+
+            text-align: end;
+        }
+
+
         .red {
             color: #C70000;
         }
@@ -68,7 +83,8 @@ const Registers = styled.div`
         display: flex;
         justify-content: space-between;
 
-        bottom: 10px;
+        position: ${props => props.length < 10 ? 'absolute' : 'static'};
+        bottom: 0;
 
         margin: 18px 0 10px 0;
 
