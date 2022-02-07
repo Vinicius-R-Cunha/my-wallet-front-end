@@ -23,7 +23,7 @@ export default function AddExpense() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const promise = axios.post('http://localhost:5000/add-expense', { value, description, expense: true }, {
+        const promise = axios.post('http://localhost:5000/wallet', { value, description, expense: true }, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
