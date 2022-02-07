@@ -15,10 +15,12 @@ export default function Register() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        let checked = false;
+        if (token && !checked) {
             navigate('/');
         }
-    });
+        return () => checked = true;
+    }, [token, navigate]);
 
     function handleInput(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });

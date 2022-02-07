@@ -13,10 +13,12 @@ export default function Login() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (token) {
+        let checked = false;
+        if (token && !checked) {
             navigate('/');
         }
-    });
+        return (() => checked = true);
+    }, [token, navigate]);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -37,6 +39,7 @@ export default function Login() {
         } else {
             setError(true);
             setTimeout(() => setError(false), 2500);
+            return;
         }
     }
 
