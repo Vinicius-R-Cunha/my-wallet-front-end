@@ -27,7 +27,7 @@ export default function Login() {
         const passwordNotEmpty = formData.password !== '';
 
         if (emailNotEmpty && passwordNotEmpty) {
-            const promise = axios.post('http://localhost:5000/sign-in', formData);
+            const promise = axios.post('https://my-wallet-vini.herokuapp.com/sign-in', formData);
             promise.then(answer => {
                 setToken(answer.data.token);
                 setUserName(answer.data.name);

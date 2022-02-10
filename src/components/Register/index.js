@@ -39,7 +39,7 @@ export default function Register() {
         const passwordNotEmpty = formData.password !== '';
 
         if (passwordsMatch && nameNotEmpty && emailNotEmpty && passwordNotEmpty && emailIsLowerCased) {
-            const promise = axios.post('http://localhost:5000/sign-up', formData);
+            const promise = axios.post('https://my-wallet-vini.herokuapp.com/sign-up', formData);
             promise.then(() => navigate("/sign-in"));
             promise.catch(error => {
                 if (error.response.data === 'used email') {

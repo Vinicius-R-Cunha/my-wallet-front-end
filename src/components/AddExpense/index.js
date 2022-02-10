@@ -23,13 +23,13 @@ export default function AddExpense() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const promise = axios.post('http://localhost:5000/wallet', { value, description, expense: true }, {
+        const promise = axios.post('https://my-wallet-vini.herokuapp.com/wallet', { value, description, expense: true }, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
         });
         promise.then(() => navigate('/'));
-        promise.catch(answer => console.log(answer));
+        promise.catch(answer => console.log(answer.response));
     }
 
     function rightToLeftFormatter(value) {

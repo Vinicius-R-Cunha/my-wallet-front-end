@@ -15,7 +15,7 @@ export default function Wallet() {
     const navigate = useNavigate();
 
     const renderPage = useCallback(() => {
-        const promise = axios.get('http://localhost:5000/wallet', {
+        const promise = axios.get('https://my-wallet-vini.herokuapp.com/wallet', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
@@ -36,7 +36,7 @@ export default function Wallet() {
     }, [token, navigate, renderPage]);
 
     function handleDelete(obj) {
-        const promise = axios.delete(`http://localhost:5000/wallet/${obj._id}`, {
+        const promise = axios.delete(`https://my-wallet-vini.herokuapp.com/wallet/${obj._id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
