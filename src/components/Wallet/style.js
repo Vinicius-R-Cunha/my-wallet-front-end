@@ -144,4 +144,13 @@ const Buttons = styled.div`
     }
 `
 
-export { MainDiv, Registers, Buttons }
+const LoadingDiv = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+export { MainDiv, Registers, Buttons, LoadingDiv }

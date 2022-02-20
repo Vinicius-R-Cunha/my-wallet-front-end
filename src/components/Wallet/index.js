@@ -1,10 +1,11 @@
 import './style.js';
-import { MainDiv, Registers, Buttons } from "./style";
+import { MainDiv, Registers, Buttons, LoadingDiv } from "./style";
 import Header from '../Header/index.js';
 import { useContext, useEffect, useState, useCallback } from 'react';
 import UserContext from '../../contexts/UserContext.js';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import loading from '../../assets/loading.svg';
 
 export default function Wallet() {
 
@@ -47,7 +48,9 @@ export default function Wallet() {
 
     if (!expenses) {
         return (
-            <h1>Carregando</h1>
+            <LoadingDiv>
+                <img src={loading} alt='' />
+            </LoadingDiv>
         );
     }
 
