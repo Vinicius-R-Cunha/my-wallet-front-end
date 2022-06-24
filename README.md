@@ -21,12 +21,12 @@ Below are the implemented features:
 ## Technologies
 The following tools and frameworks were used in the construction of the project:<br>
 <p>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB'>
   <img style='margin: 5px;' src='https://img.shields.io/badge/dayjs%20-%2320232a.svg?&style=for-the-badge&color=green'>
   <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react-app%20-%2320232a.svg?&style=for-the-badge&color=60ddf9&logo=react&logoColor=%2361DAFB"/>
-  <img style='margin: 5px;' src="https://img.shields.io/badge/react_route%20-%2320232a.svg?&style=for-the-badge&logo=react&logoColor=%2361DAFB"/>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/styled-components%20-%2320232a.svg?&style=for-the-badge&color=b8679e&logo=styled-components&logoColor=%3a3a3a'>
-  <img style='margin: 5px;' src='https://img.shields.io/badge/mongobd%20-%2320232a.svg?&style=for-the-badge&color=yellowgreen&logo=mongodb&logoColor=%2361DAFB%27'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/mongodb%20-%2320232a.svg?&style=for-the-badge&color=yellowgreen&logo=mongodb&logoColor=%2361DAFB%27'>
   <img style='margin: 5px;' src='https://img.shields.io/badge/nodejs%20-%2320232a.svg?&style=for-the-badge&color=blue&logo=javascript&logoColor=%2361DAFB%27'>
   <img style='margin: 5px;' src='https://img.shields.io/badge/express%20-%2320232a.svg?&style=for-the-badge&color=green&logo=express&logoColor=%2361DAFB%27'>
 </p>
@@ -45,6 +45,12 @@ $ cd my-wallet-front-end
 ```bash
 $ npm i
 ```
+### Create an environment variables file in the project root (.env) and configure a variable with the name 'REACT_APP_BACK_URL' that contains the url where the backend will be running, Example:
+```bash
+REACT_APP_BACK_URL=http:localhost:5000/
+```
+### Follow the instructions to run back-end at https://github.com/Vinicius-R-Cunha/my-wallet-back-end
+
 ### Run the front-end with
 ```bash
 $ npm start
